@@ -7,15 +7,12 @@ app.get('/api', (req, res) => {
     const dayOfWeekName = new Date().toLocaleString('default', {
         weekday: 'long'
     });
-    const now = new Date();
-    const utcOffset = now.getTimezoneOffset();
-    now.setUTCHours(now.getUTCHours() - (utcOffset / 60));
-    const utcTime = now.toISOString();
-
+    const currentUTC = new Date().toISOString();
+    const formattedUTC = currentUTC.substring(0, 19) + "Z";
     res.json({
         "slack_name": slackName,
         "current_day": dayOfWeekName,
-        "utc_time": utcTime,
+        "utc_time": formattedUTC,
         "track": track,
         "github_file_url": "https://github.com/ELFrancisco4/HNGx-Backend-Stage-One/blob/Klaus/index.js",
         "github_repo_url": "https://github.com/ELFrancisco4/HNGx-Backend-Stage-One",
